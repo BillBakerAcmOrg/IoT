@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,17 @@ namespace IoTRestAPI.Controllers
 {
     public class IoTController : ApiController
     {
+        ILog _logger = null;
+
+        public IoTController(ILog logger)
+        {
+            _logger = logger;
+        }
+
         public async Task<HttpResponseMessage> Post(HttpRequestMessage requestMessage)
         {
+            _logger.Debug("what's going on here?");
+
             var json = string.Empty;
             JArray events = null;
 

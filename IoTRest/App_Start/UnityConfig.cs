@@ -2,6 +2,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using log4net;
+using log4net.Config;
 
 namespace IoTRest.App_Start
 {
@@ -38,8 +39,21 @@ namespace IoTRest.App_Start
 
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterInstance<ILog>(LogManager.GetLogger("foo.txt"));
+            container.RegisterInstance<ILog>(IoTLogger.Logger);
             container.RegisterType<Controllers.IFOO, Controllers.FOO>();
         }
+    }
+
+    public class IoTLogger
+    {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(IoTLogger));
+
+        public static ILog Logger { get { return logger; } }
+    
+        static IoTLogger()
+        {
+            XmlConfigurator.Configure();
+        }
+
     }
 }
