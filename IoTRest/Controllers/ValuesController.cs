@@ -34,10 +34,10 @@ namespace IoTRest.Controllers
         //    _foo = foo;
         //}
 
-        //public ValuesController(ILog logger)
-        //{
-        //    _logger = logger;
-        //}
+        public ValuesController(ILog logger)
+        {
+            _logger = logger;
+        }
 
         public async Task<HttpResponseMessage> Post(HttpRequestMessage requestMessage)
         {
